@@ -1,0 +1,63 @@
+{
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/dyson/frontend",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/next:build",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "root": "apps/dyson/frontend",
+        "outputPath": "dist/apps/dyson/frontend"
+      },
+      "configurations": {
+        "development": {
+          "outputPath": "apps/dyson/frontend"
+        },
+        "production": {}
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/next:server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "dyson-frontend:build",
+        "dev": true,
+        "proxyConfig": "apps/dyson/frontend/proxy.conf.json"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "dyson-frontend:build:development",
+          "dev": true
+        },
+        "production": {
+          "buildTarget": "dyson-frontend:build:production",
+          "dev": false
+        }
+      }
+    },
+    "export": {
+      "executor": "@nrwl/next:export",
+      "options": {
+        "buildTarget": "dyson-frontend:build:production"
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/dyson/frontend"],
+      "options": {
+        "jestConfig": "apps/dyson/frontend/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/dyson/frontend/**/*.{ts,tsx,js,jsx}"]
+      }
+    }
+  },
+  "tags": ["frontend", "next.js"]
+}

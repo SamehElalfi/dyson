@@ -1,5 +1,9 @@
 {
   "$schema": "./node_modules/nx/schemas/workspace-schema.json",
   "version": 2,
-  "projects": {}
+  "projects": {
+    "dyson-backend": "apps/dyson/backend",
+    "dyson-frontend": "apps/dyson/frontend",
+    "dyson-frontend-e2e": "apps/dyson/frontend-e2e"
+  }
 }
